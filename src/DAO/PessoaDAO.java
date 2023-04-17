@@ -14,21 +14,19 @@ public class PessoaDAO {
 
     private Pessoa[] pessoas = new Pessoa[500];
 
+    public PessoaDAO() {
 
-    public  PessoaDAO(){
-
-          Pessoa p1 = new Pessoa();
+        Pessoa p1 = new Pessoa();
         p1.setNome("josephina");
         this.adicionado(p1);
 
         Pessoa p2 = new Pessoa();
         p2.setNome("jaspion");
-          this.adicionado(p2);
+        this.adicionado(p2);
 
-}
-    
-    
-  public boolean adicionado(Pessoa p) {
+    }
+
+    public boolean adicionado(Pessoa p) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();
         if (proximaPosicaoLivre != -1) {
             pessoas[proximaPosicaoLivre] = p;
@@ -38,7 +36,7 @@ public class PessoaDAO {
         }
 
     }
-    
+
     public boolean ehVazio() {
         for (Pessoa pessoa : pessoas) {
             if (pessoa != null) {
@@ -48,7 +46,7 @@ public class PessoaDAO {
         return true;
 
     }
-    
+
     private int proximaPosicaoLivre() {
         for (int i = 0; i < pessoas.length; i++) {
             if (pessoas[i] == null) {
@@ -58,9 +56,8 @@ public class PessoaDAO {
         }
         return -1;
     }
-    
-    
-        public void mostrarTodos() {
+
+    public void mostrarTodos() {
         boolean temPessoas = false;
         for (Pessoa p : pessoas) {
             if (p != null) {
@@ -73,5 +70,23 @@ public class PessoaDAO {
         }
     }
 
+    public boolean removerPessoa(String id) {
+        boolean id_encontrado = false;
+        long id_pessoa = Long.parseLong(id);
+        for (int i = 0; i < pessoas.length; i++) {
+            if (pessoas[i].getID() == id_pessoa) {
+                pessoas[i] = null;
+                System.out.println("Pessoa removida.");
+                id_encontrado = true;
+                return id_encontrado;
+
+            }
+        }
+        if (!id_encontrado) {
+            System.out.println("Pessoa não cadastrada.");
+            
+        }
+        return id_encontrado;
+    }
 
 }
